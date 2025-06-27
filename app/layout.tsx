@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "./hooks/themeContext";
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -21,7 +22,9 @@ export default function RootLayout({
       <body
         className={`${montserrat.variable} antialiased`}
       >
-        {children}
+        <ThemeProvider>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
