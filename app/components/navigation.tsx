@@ -35,7 +35,7 @@ export default function Navigation() {
                 <h1 className="text-7xl">
                 CREATE IDEAL INTERIOR FOR YOU
                 </h1>
-                <div className="text-xl p-2 px-8 border rounded-full w-fit">
+                <div className={`${isDark ? 'text-neutral-800 border-white bg-white' : 'text-neutral-800 border-neutral-800 bg-white/0'} transition-all duration-800 delay-200 text-xl p-2 px-8 border rounded-full w-fit`}>
                     CONSULT NOW
                 </div>
             </div>
