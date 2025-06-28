@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 import Image from 'next/image';
+import { useTheme } from '../hooks/themeContext';
 
 interface Section {
     id: number;
@@ -14,6 +15,7 @@ interface Section {
 export default function PortfolioShowcase() {
     const [hoveredSection, setHoveredSection] = useState<number | null>(null);
     const [clickedSection, setClickedSection] = useState<number | null>(null);
+    const {setIsDark } = useTheme();
 
     // Content for each section - customize these as needed
     const sections: Section[] = [
@@ -29,8 +31,6 @@ export default function PortfolioShowcase() {
                     alt={'Gambar Test 1'}
                     className="object-cover w-full h-full"
                 />
-            {/* <h2 className="text-4xl font-bold mb-4">Section 1</h2>
-            <p className="text-lg">Your content here - images, text, anything!</p> */}
             </div>
         )
         },
@@ -46,8 +46,6 @@ export default function PortfolioShowcase() {
                     alt={'Gambar Test 1'}
                     className="object-cover w-full h-full"
                 />
-            {/* <h2 className="text-4xl font-bold mb-4">Section 1</h2>
-            <p className="text-lg">Your content here - images, text, anything!</p> */}
             </div>
         )
         },
@@ -63,8 +61,6 @@ export default function PortfolioShowcase() {
                     alt={'Gambar Test 1'}
                     className="object-cover w-full h-full"
                 />
-            {/* <h2 className="text-4xl font-bold mb-4">Section 1</h2>
-            <p className="text-lg">Your content here - images, text, anything!</p> */}
             </div>
         )
         },
@@ -80,24 +76,20 @@ export default function PortfolioShowcase() {
                     alt={'Gambar Test 1'}
                     className="object-cover w-full h-full"
                 />
-            {/* <h2 className="text-4xl font-bold mb-4">Section 1</h2>
-            <p className="text-lg">Your content here - images, text, anything!</p> */}
             </div>
         )
         }
     ];
 
-    const handleSectionClick = (sectionId : number): void => {
-        if (clickedSection === sectionId) {
-        // If clicking the already expanded section, close it
+    const handleSectionClick = (sectionId: number): void => {
+    if (clickedSection === sectionId) {
+        // ❌ Clicking same section again: shrink & go back to light mode
         setClickedSection(null);
-        } else if (clickedSection !== null) {
-        // If another section is expanded, close it first, then open the new one
-        setClickedSection(null);
-        setTimeout(() => setClickedSection(sectionId), 100);
+        setIsDark(false); // ✅ Return to light mode
         } else {
-        // If no section is expanded, expand this one
+        // ✅ Clicking a new section: expand & go to dark mode
         setClickedSection(sectionId);
+        setIsDark(true);
         }
     };
 
@@ -106,7 +98,7 @@ export default function PortfolioShowcase() {
         {sections.map((section) => (
             <AnimatePresence key={section.id}>
                 <motion.div 
-                    className={`border-[0.5px] border-neutral-400 relative h-screen ${section.bgColor} overflow-hidden`}
+                    className={`border border-neutral-300 relative h-screen ${section.bgColor} overflow-hidden`}
                     onMouseEnter={() => clickedSection === null && setHoveredSection(section.id)}
                     onMouseLeave={() => setHoveredSection(null)}
                     animate={{
@@ -124,9 +116,9 @@ export default function PortfolioShowcase() {
                         initial={{ y: '100%', height: '100%' }}
                         animate={{ y: '0%', height: '100%' }}
                         exit={{ y: '-100%', height: '70%' }}
-                        transition={{ 
-                            duration: 0.8, 
-                            ease: 'easeInOut' 
+                        transition={{
+                            duration: 1, 
+                            ease: 'easeInOut'
                         }}
                         className={`absolute top-0 left-0 w-full overflow-hidden cursor-pointer`}
                         onClick={() => handleSectionClick(section.id)}
