@@ -1,5 +1,6 @@
 'use client';
 
+import { motion } from "framer-motion";
 import { useTheme } from "../hooks/themeContext";
 
 export default function Navigation() {
@@ -31,14 +32,25 @@ export default function Navigation() {
             </div>
 
             {/* Hero */}
-            <div className="flex flex-col w-2/4 gap-10 p-10">
-                <h1 className="text-7xl">
-                CREATE IDEAL INTERIOR FOR YOU
-                </h1>
+            <motion.div 
+                className="flex flex-col w-2/4 gap-10 p-10"
+                initial={{ opacity: 0, y: '30%' }}
+                animate={{ opacity: 1, y: 0}}
+                transition={{
+                    delay: 0.5,
+                    duration: 2.5,
+                    ease: 'circInOut',
+                }}
+            >
+                <div>
+                    <h1 className="text-7xl">
+                    CREATE IDEAL INTERIOR FOR YOU
+                    </h1>
+                </div>
                 <div className={`${isDark ? 'text-neutral-800 border-white bg-white' : 'text-neutral-800 border-neutral-800 bg-white/0'} transition-all duration-800 delay-200 text-xl p-2 px-8 border rounded-full w-fit`}>
                     CONSULT NOW
                 </div>
-            </div>
+            </motion.div>
         </div>
     );
 }
