@@ -7,7 +7,7 @@ export default function Navigation() {
     const { isDark } = useTheme();
 
     return (
-        <div className="flex flex-row w-full items-start z-10 transition-all duration-500 delay-200">
+        <div className="flex relative flex-row w-full items-start z-10 transition-all duration-500 delay-200">
             {/* Logo + Title */}
             <div className="flex flex-row justify-start items-center w-1/4 gap-4 p-10">
                 <div className={`${isDark ? 'text-white' : 'text-neutral-800'} transition-all duration-500 delay-200`}>
