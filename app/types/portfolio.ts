@@ -4,4 +4,5 @@ export interface Section {
     overlayColor: string;
     imageSrc: string;
     alt: string;
+    description: string;
 }
